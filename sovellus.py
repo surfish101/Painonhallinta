@@ -71,20 +71,27 @@ while True:
 
         else:
             print(tulokset[1])
-    '''
+    
     tapahtui_virhe = True
     # Kysytään käyttäjältä sukupuoli
     while tapahtui_virhe == True:
-        sukupuoli_str = input('Nainen 0, mies 1: ')
+        sukupuoli_str = input('Käyttäjän sukupuoli; Nainen 0, mies 1: ')
         tulokset = sanity2.liukuluvuksi(sukupuoli_str)
 
         if tulokset[0] == 0:
             sukupuoli = tulokset[2]
-            tapahtui_virhe = False
+            tarkistettu_sukupuoli = sanity2.rajatarkistus(sukupuoli, 0, 1)
+
+            if tarkistettu_sukupuoli[0] == 0:
+                tapahtui_virhe = False
+            else:
+                print(tarkistettu_sukupuoli[1])
         else:
             print(tulokset[1])
-    '''
-
+    
+    kayttajan_painoindeksi = laskenta.bmi(paino, pituus)
+    kayttajan_rasvaprosentti = laskenta.rasvaprosentti(kayttajan_painoindeksi, ika, sukupuoli)
+    print('Rasvaprosenttisi on:', kayttajan_rasvaprosentti)
     
     # Poistuminen ikuisesta silmukasta
     uusi = input('Lasketaanko uuden henkilön rasvaprosentti? (K/E) ')
