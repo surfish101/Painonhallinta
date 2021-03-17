@@ -77,15 +77,15 @@ def rajatarkistus(arvo, alaraja, ylaraja):
     """
 
     virhekoodi = 0
-    virhesanoma = 'Arvo ok'
+    virhesanoma = 'Arvo OK'
     
     # Arvo alle alarajan
-    if arvo <= alaraja:
+    if arvo < alaraja:
         virhekoodi = 5
         virhesanoma = 'Annettu arvo alle alarajan (' + str(alaraja) + ').'
 
     # Arvo yli ylärajan
-    if arvo >= ylaraja:
+    if arvo > ylaraja:
         virhekoodi = 6
         virhesanoma = 'Annettu arvo yli ylärajan (' + str(ylaraja) + ').'
 
@@ -113,7 +113,7 @@ if __name__ == '__main__':
     syote = 'paino 70.5'
     print('Syöte:', syote, 'Tulokset:', liukuluvuksi(syote))
 
-    # 5. Syötteen lopussa tekstiö
+    # 5. Syötteen lopussa tekstiä
     syote = '80.5 kg'
     print('Syöte:', syote, 'Tulokset:', liukuluvuksi(syote))
 
