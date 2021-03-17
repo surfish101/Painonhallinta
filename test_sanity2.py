@@ -28,7 +28,7 @@ def test_liukuluvuksi_pilkku():
     assert sanity2.liukuluvuksi('125,5') == [0, 'Syöte OK', 125.5]
 
 # 3. Syötteessä useampi desimaalipiste; virhekoodi 1, virhesanoma 'Syöte sisältää useita erottimia. Vain yksi arvo on sallittu', arvo 0
-def test_liukuluvuksi_pisteita():
+def test_liukuluvuksi_monta_pistetta():
     assert sanity2.liukuluvuksi('12.5.5') == [1, 'Syöte sisältää useita erottimia. Vain yksi arvo on sallittu', 0]
 
 # 4. Syötteen alussa tekstiä; virhekoodi 3, virhesanoma 'Ennen desimaalierotinta ylimääräisiä merkkejä: vain numerot ja desimaalipiste on sallittu', arvo 0
