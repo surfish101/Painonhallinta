@@ -15,7 +15,7 @@ while True:
     # Kysytään käyttäjältä paino
     tapahtui_virhe = True
 
-    # Silmukka jossa pyöritään kunnes saadaan järkevä arvo
+    # Silmukka jossa pyöritään kunnes saadaan painolle järkevä arvo
     while tapahtui_virhe == True:
         paino_str = input('Paino kilogrammoina: ')
         tulokset = sanity2.liukuluvuksi(paino_str)
@@ -37,14 +37,14 @@ while True:
             print(tulokset[1])
 
     tapahtui_virhe = True
-    # Kysytään käyttäjältä pituus
+    # Silmukka jossa pyöritään kunnes saadaan pituudelle järkevä arvo
     while tapahtui_virhe == True:
-        pituus_str = input('Pituus metreinä: ')
+        pituus_str = input('Pituus sentteinä: ')
         tulokset = sanity2.liukuluvuksi(pituus_str)
 
         if tulokset[0] == 0:
             pituus = tulokset[2]
-            tarkistettu_pituus = sanity2.rajatarkistus(pituus, 1.0, 3.0)
+            tarkistettu_pituus = sanity2.rajatarkistus(pituus, 100, 300)
 
             if tarkistettu_pituus[0] == 0:
                 tapahtui_virhe = False
@@ -55,14 +55,14 @@ while True:
             print(tulokset[1])
     
     tapahtui_virhe = True 
-    # Kysytään käyttäjän ikä
+    # Silmukka jossa pyöritään kunnes saadaan pituudelle järkevä arvo
     while tapahtui_virhe == True:
         ika_str = input('Ikä vuosina: ')
         tulokset = sanity2.liukuluvuksi(ika_str)
 
         if tulokset[0] == 0:
             ika = tulokset[2]
-            tarkistettu_ika = sanity2.rajatarkistus(ika, 18, 100)
+            tarkistettu_ika = sanity2.rajatarkistus(ika, 3, 120)
 
             if tarkistettu_ika[0] == 0:
                 tapahtui_virhe = False
@@ -73,9 +73,9 @@ while True:
             print(tulokset[1])
     
     tapahtui_virhe = True
-    # Kysytään käyttäjältä sukupuoli
+    # Silmukka jossa pyöritään kunnes saadaan sukupuolelle järkevä arvo
     while tapahtui_virhe == True:
-        sukupuoli_str = input('Käyttäjän sukupuoli; Nainen 0, mies 1: ')
+        sukupuoli_str = input('Käyttäjän sukupuoli: Nainen: 0, mies: 1: ')
         tulokset = sanity2.liukuluvuksi(sukupuoli_str)
 
         if tulokset[0] == 0:
@@ -89,11 +89,15 @@ while True:
         else:
             print(tulokset[1])
     
+    # Lasketaan ja tulostetaan painoindeksi kahden desimaalin tarkkuudella
     kayttajan_painoindeksi = laskenta.bmi(paino, pituus)
+    print('Painoindeksisi on:', str(round(kayttajan_painoindeksi, 2)))
+
+    # Lasketaan ja tulostetaan rasvaprosentti kahden desimaalin tarkkuudella
     kayttajan_rasvaprosentti = laskenta.rasvaprosentti(kayttajan_painoindeksi, ika, sukupuoli)
-    print('Rasvaprosenttisi on:', kayttajan_rasvaprosentti)
+    print('Rasvaprosenttisi on:', str(round(kayttajan_rasvaprosentti, 2)))
     
     # Poistuminen ikuisesta silmukasta
-    uusi = input('Lasketaanko uuden henkilön rasvaprosentti? (K/E) ')
-    if uusi == 'E' or uusi == 'e':
+    uusi = input('Lasketaanko uuden henkilön rasvaprosentti? (K/e) ')
+    if uusi.upper() == 'E':
         break
