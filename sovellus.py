@@ -1,103 +1,53 @@
 # Tämä on painonhallintasovelluksen pääohjelma
 
 # Kirjastojen ja modulien käyttöönotot
-import sanity2
+import kysymys
 import laskenta
+import luokat
 
 # Varsinaisen pääohjelman alku
 
-# Komponenttien alustukset
-
 # Työsilmukka. Ikuinen silmukka jossa on poistumistoiminto
 uusi = 'K'
+lista = []
 while True:
     
-    # Kysytään käyttäjältä paino
-    tapahtui_virhe = True
+    # Tehdään kysymykset modulin kysymys.py funktiota käyttämällä
+    etunimi = input('Anna etunimesi: ')
+    sukunimi = input('Anna sukunimesi: ')
+    paino = kysymys.kysy_liukuluku('Paino kiloina: ', 30, 300)
+    pituus = kysymys.kysy_liukuluku('Pituus sentteinä: ', 100, 250)
+    ika = kysymys.kysy_liukuluku('Ikä vuosina: ', 3, 120)
+    sukupuoli = kysymys.kysy_liukuluku('Sukupuoli: Nainen 0, mies 1: ', 0, 1)
 
-    # Silmukka jossa pyöritään kunnes saadaan painolle järkevä arvo
-    while tapahtui_virhe == True:
-        paino_str = input('Paino kilogrammoina: ')
-        tulokset = sanity2.liukuluvuksi(paino_str)
-        
-        # Katsotaan onko virhekoodi 0, ja tallennetaan arvo muuttujaan paino
-        if tulokset[0] == 0:
-            paino = tulokset[2]
-            tarkistettu_paino = sanity2.rajatarkistus(paino, 40, 300)
-
-            # Katsotaan onko arvo sallittujen rajojen sisällä tutkimalla virhekoodia
-            if tarkistettu_paino[0] == 0:
-                tapahtui_virhe = False
-            else:
-                # Tulostetaan virheilmoitus
-                print(tarkistettu_paino[1])
-
-        # Jos virhekoodi ei ole 0, tulostetaan virheilmoitus        
-        else:
-            print(tulokset[1])
-
-    tapahtui_virhe = True
-    # Silmukka jossa pyöritään kunnes saadaan pituudelle järkevä arvo
-    while tapahtui_virhe == True:
-        pituus_str = input('Pituus sentteinä: ')
-        tulokset = sanity2.liukuluvuksi(pituus_str)
-
-        if tulokset[0] == 0:
-            pituus = tulokset[2]
-            tarkistettu_pituus = sanity2.rajatarkistus(pituus, 100, 300)
-
-            if tarkistettu_pituus[0] == 0:
-                tapahtui_virhe = False
-            else:
-                print(tarkistettu_pituus[1])
-
-        else:
-            print(tulokset[1])
-    
-    tapahtui_virhe = True 
-    # Silmukka jossa pyöritään kunnes saadaan pituudelle järkevä arvo
-    while tapahtui_virhe == True:
-        ika_str = input('Ikä vuosina: ')
-        tulokset = sanity2.liukuluvuksi(ika_str)
-
-        if tulokset[0] == 0:
-            ika = tulokset[2]
-            tarkistettu_ika = sanity2.rajatarkistus(ika, 3, 120)
-
-            if tarkistettu_ika[0] == 0:
-                tapahtui_virhe = False
-            else:
-                print(tarkistettu_ika[1])
-
-        else:
-            print(tulokset[1])
-    
-    tapahtui_virhe = True
-    # Silmukka jossa pyöritään kunnes saadaan sukupuolelle järkevä arvo
-    while tapahtui_virhe == True:
-        sukupuoli_str = input('Käyttäjän sukupuoli: Nainen: 0, mies: 1: ')
-        tulokset = sanity2.liukuluvuksi(sukupuoli_str)
-
-        if tulokset[0] == 0:
-            sukupuoli = tulokset[2]
-            tarkistettu_sukupuoli = sanity2.rajatarkistus(sukupuoli, 0, 1)
-
-            if tarkistettu_sukupuoli[0] == 0:
-                tapahtui_virhe = False
-            else:
-                print(tarkistettu_sukupuoli[1])
-        else:
-            print(tulokset[1])
-    
-    # Lasketaan ja tulostetaan painoindeksi kahden desimaalin tarkkuudella
+    # Luodaan oliot iästä riippuen  
+    if ika >= 18:
+        tavoitepaino = kysymys.kysy_liukuluku('Tavoitepainosi kiloissa: ', 30, 300)
+        aikuinen = luokat.Aikuinen(etunimi, sukunimi, pituus, paino, ika, sukupuoli, tavoitepaino)
+        lista.append(aikuinen)
+    else:
+        lapsi = luokat.Lapsi(etunimi, sukunimi, pituus, paino, ika, sukupuoli)
+        lista.append(lapsi)
+    '''# Lasketaan ja tulostetaan painoindeksi kahden desimaalin tarkkuudella
     kayttajan_painoindeksi = laskenta.bmi(paino, pituus)
-    print('Painoindeksisi on:', str(round(kayttajan_painoindeksi, 2)))
+    print('Painoindeksisi on:', str(round(kayttajan_painoindeksi, 1)))
 
     # Lasketaan ja tulostetaan rasvaprosentti kahden desimaalin tarkkuudella
     kayttajan_rasvaprosentti = laskenta.rasvaprosentti(kayttajan_painoindeksi, ika, sukupuoli)
-    print('Rasvaprosenttisi on:', str(round(kayttajan_rasvaprosentti, 2)))
-    
+    print('Rasvaprosenttisi on:', str(round(kayttajan_rasvaprosentti, 1)))'''
+
     # Poistuminen ikuisesta silmukasta
     uusi = input('Lasketaanko uuden henkilön rasvaprosentti? (K/e) ')
     if uusi.upper() == 'E':
         break
+
+# Ikuisen silmukan jälkeen tulostetaan tietoja
+
+# Otetaan listan ensimmäinen olio pois ja tulostetaan sen tietoja
+eka = lista.pop(0)
+print(eka.etunimi, eka.sukunimi, eka.rasvaprosentti())
+
+# Jos listassa on enemmän kuin yksi olio, otetaan listan viimeinen olio pois ja tulostetaan sen tietoja
+if len(lista) > 0:
+    vika = lista.pop()
+    print(vika.etunimi, vika.sukunimi, vika.rasvaprosentti())

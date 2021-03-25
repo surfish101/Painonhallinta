@@ -44,6 +44,7 @@ def kysy_liukuluku(kysymys, alaraja, ylaraja):
 
     return luku
 
+#Tilapäistestit
 if __name__ == '__main__':
     vastaus = kysy_liukuluku('Anna luku', 100, 200)
     print(vastaus)

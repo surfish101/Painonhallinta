@@ -4,7 +4,7 @@
 
 # Painoindeksi
 def bmi(paino, pituus):
-    """ Laskee painoindeksin kaavalla paino/pituus^2
+    """ Laskee painoindeksin kaavalla paino/(pituus/100)^2
 
     Args:
         paino (float): Paino kilogrammoina (kg)
