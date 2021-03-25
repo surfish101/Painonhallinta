@@ -9,10 +9,9 @@ class Weatherstation:
 
 class Observation(Weatherstation):
     """Säähavainto aliluokka"""
-    def __init__(self, name, type, location, date, temperature, windspeed, wind_direction, cloudcoverage, visibility):
-        super().__init__(name, type, location)
+    def __init__(self, date: str, temperature, windspeed, wind_direction, cloudcoverage, visibility):
         self.date = date
-        self.temperature = temperature
+        self.temperature = str(temperature) +'\'c'
         self.windspeed = windspeed
         self.wind_direction = wind_direction
         self.cloudcoverage = cloudcoverage
@@ -29,5 +28,12 @@ class Observation(Weatherstation):
 
 if __name__ == "__main__":
 
-    turun_lentoasema = Observation('Turun Lentoasema', 'lentokenttä', 'Turku', '25.03.2021', 6.0, 8.0, 180, '5/8', 5)
-    print(turun_lentoasema.location, turun_lentoasema.temperature, 'C', 'Tuulen nopeus (km/h):', turun_lentoasema.windspeed_kilometers(), 'Tuulen nopeus solmuissa:', turun_lentoasema.windspeed_knots())
+    turun_lentoasema = Weatherstation('Turun Lentoasema', 'Lentokenttä', 'Turku')
+    isokari = Weatherstation('Isokarin sääasema', 'Rannikkoasema', 'Kustavi')
+
+    havainto = Observation('24.03.2021', 5, 20, 300, 4/8, 3)
+
+    print('Säähavainto tehtiin', havainto.date + ', lämpötila oli', havainto.temperature, "\nTuulennopeus oli:", str(havainto.windspeed) + 'm/s ja suunta', havainto.wind_direction, 'astetta')
+    print(str(havainto.windspeed) + 'm/s kilometreinä tunnissa on', havainto.windspeed_kilometers())
+
+    print('Tuulennopeus solmuissa oli', havainto.windspeed_knots())
