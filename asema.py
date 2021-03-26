@@ -18,11 +18,11 @@ class Saahavainto(Saaasema):
         self.nakyvyys = nakyvyys
 
     def tnopeuskm(self):
-        kmspeed = self.windspeed * 3.6
+        kmspeed = self.tnopeus * 3.6
         return kmspeed
 
     def tnopeussolmu(self):
-        knotspeed = self.windspeed * 1.94
+        knotspeed = self.tnopeus * 1.94
         return knotspeed
 
 
