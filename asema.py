@@ -1,14 +1,12 @@
 # Sääasema oliosovellus
 
 class Weatherstation:
-    """Yliluokka sääasemille"""
     def __init__(self, name, type, location):
         self.name = name
         self.type = type
         self.location = location
 
 class Observation(Weatherstation):
-    """Säähavainto aliluokka"""
     def __init__(self, date: str, temperature, windspeed, wind_direction, cloudcoverage, visibility):
         self.date = date
         self.temperature = str(temperature) +'\'c'
