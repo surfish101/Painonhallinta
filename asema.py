@@ -1,37 +1,39 @@
 # Sääasema oliosovellus
 
-class Weatherstation:
-    def __init__(self, name, type, location):
-        self.name = name
-        self.type = type
-        self.location = location
+class Saaasema:
+    def __init__(self, nimi, tyyppi, sijainti, numero):
+        self.nimi = nimi
+        self.tyyppi = tyyppi
+        self.sijainti = sijainti
+        self.numero = numero
 
-class Observation(Weatherstation):
-    def __init__(self, date: str, temperature, windspeed, wind_direction, cloudcoverage, visibility):
-        self.date = date
-        self.temperature = str(temperature) +'\'c'
-        self.windspeed = windspeed
-        self.wind_direction = wind_direction
-        self.cloudcoverage = cloudcoverage
-        self.visibility = visibility
+class Saahavainto(Saaasema):
+    def __init__(self, numero, paivamaara: str, lampotila, tnopeus, tsuunta, pilvisyys, nakyvyys):
+        super().__init__(numero)
+        self.paivamaara = paivamaara
+        self.lampotila = str(lampotila) +'\'c'
+        self.tnopeus = tnopeus
+        self.tsuunta = tsuunta
+        self.pilvisyys = pilvisyys
+        self.nakyvyys = nakyvyys
 
-    def windspeed_kilometers(self):
+    def tnopeuskm(self):
         kmspeed = self.windspeed * 3.6
         return kmspeed
 
-    def windspeed_knots(self):
+    def tnopeussolmu(self):
         knotspeed = self.windspeed * 1.94
         return knotspeed
 
 
 if __name__ == "__main__":
 
-    turun_lentoasema = Weatherstation('Turun Lentoasema', 'Lentokenttä', 'Turku')
-    isokari = Weatherstation('Isokarin sääasema', 'Rannikkoasema', 'Kustavi')
+    turun_lentoasema = Saaasema('Turun Lentoasema', 'Lentokenttä', 'Turku')
+    isokari = Saaasema('Isokarin sääasema', 'Rannikkoasema', 'Kustavi')
 
-    havainto = Observation('24.03.2021', 5, 20, 300, 4/8, 3)
+    havainto = Saahavainto('24.03.2021', 5, 20, 300, 4/8, 3)
 
-    print('Säähavainto tehtiin', havainto.date + ', lämpötila oli', havainto.temperature, "\nTuulennopeus oli:", str(havainto.windspeed) + 'm/s ja suunta', havainto.wind_direction, 'astetta')
-    print(str(havainto.windspeed) + 'm/s kilometreinä tunnissa on', havainto.windspeed_kilometers())
+    print('Säähavainto tehtiin', havainto.paivamaara + ', lämpötila oli', havainto.lampotila, "\nTuulennopeus oli:", str(havainto.tnopeus) + 'm/s ja suunta', havainto.wind_direction, 'astetta')
+    print(str(havainto.tnopeus) + 'm/s kilometreinä tunnissa on', havainto.tnopeuskm())
 
-    print('Tuulennopeus solmuissa oli', havainto.windspeed_knots())
+    print('Tuulennopeus solmuissa oli', havainto.tnopeussolmu())
